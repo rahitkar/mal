@@ -127,6 +127,19 @@ class Str extends MalValue {
   }
 }
 
+class Fn extends MalValue {
+  constructor(env, bindings, body) {
+    super();
+    this.env = env;
+    this.bindings = bindings;
+    this.body = body;
+  }
+
+  pr_str(readableForm = false) {
+    return "#<function>";
+  }
+}
+
 const pr_str = (val, readableForm = false) => {
   if (val instanceof MalValue) return val.pr_str(readableForm);
   return val.toString();
@@ -144,4 +157,5 @@ module.exports = {
   MalSymbol,
   Str,
   HashMap,
+  Fn
 };
