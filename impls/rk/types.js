@@ -8,6 +8,10 @@ class NilValue extends MalValue {
   pr_str(readableForm = false) {
     return "nil";
   }
+
+  count() {
+    return 0;
+  }
 }
 
 class List extends MalValue {
@@ -23,7 +27,11 @@ class List extends MalValue {
   }
 
   isEmpty() {
-    return this.ast.length === 0
+    return this.ast.length === 0;
+  }
+
+  count() {
+    return this.ast.length;
   }
 }
 
@@ -39,7 +47,11 @@ class Vector extends MalValue {
     );
   }
   isEmpty() {
-    return this.ast.length === 0
+    return this.ast.length === 0;
+  }
+
+  count() {
+    return this.ast.length;
   }
 }
 
@@ -61,6 +73,10 @@ class HashMap extends MalValue {
       separator = ", ";
     });
     return "{" + strRepresentation + "}";
+  }
+
+  count() {
+    return this.data.entries().length;
   }
 }
 
@@ -104,6 +120,10 @@ class Str extends MalValue {
       );
     }
     return this.val;
+  }
+
+  count() {
+    return this.string.length;
   }
 }
 

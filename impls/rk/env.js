@@ -1,7 +1,18 @@
+const { MalSymbol } = require("./types");
+
 class Env {
   constructor(outer = null) {
     this.data = new Map();
     this.outer = outer;
+  }
+
+  static CreateEnv(env, binds = [], exprs = []) {
+    const newEnv = new Env(env);
+    for (let i = 0; i < binds.length; i++) {
+      if (binds[i] instanceof MalSymbol) newEnv.set(binds[i], exprs[i]);
+      else throw "expected symbol but found: " + binds[i];
+    }
+    return newEnv;
   }
 
   set(symbol, malValue) {
